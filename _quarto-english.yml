@@ -15,7 +15,7 @@ website:
       - text: "Home"
         href: index.html
       - text: "Projects"
-        href: projects.html
+        href: projects-en.html
       #- text: "Blog"
       #  href: blog.html
       #- icon: rss

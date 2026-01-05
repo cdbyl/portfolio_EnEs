@@ -1,0 +1,15 @@
+---
+title: "Quality of Life Index"
+description: "Applying ACUMAR’s Quality of Life Index (ICV) —which assesses well-being across housing, education, health, and environment— to the neighbor Reconquista River Basin, based on the region's strong geographic and socioeconomic similarities to the originally studied Matanza-Riachuelo basin. By replicating this methodology, this study aims to generate comparable results and utilize cartographic visualization to identify vulnerable areas, ultimately providing a strategic tool for institutions to optimize resource allocation and design targeted socio-environmental policies."
+date: "2019-11-15"
+lang: en
+categories: [QGIS, Cartography, SOTM Latam]
+image: "images/img1.jpeg"  # Crucial for the Grid look!
+format:
+  html:
+    code-fold: true # Nice touch: hides code until user clicks "Show Code"
+---
+
+(Your text, maps, and code go here...)
+
+[Your text and maps go here...]

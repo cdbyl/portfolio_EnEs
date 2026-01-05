@@ -1,10 +1,17 @@
 [
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Carolina Byl",
+    "objectID": "projects_es/analysis-01.html",
+    "href": "projects_es/analysis-01.html",
+    "title": "`IVC",
     "section": "",
-    "text": "GIS Analyst and Environmental Engineer with 4+ years of experience delivering spatial analysis, cartographic products, and cloud-based geospatial solutions for environmental and infrastructure projects. Proven background in enterprise geodatabases, remote sensing analysis using Google Earth Engine, and field data collection workflows. Programming experience in Python, SQL, and JavaScript, applied to support multidisciplinary teams in national and international contexts, including technical instruction and mentoring.\n\n\n\nBS & MS in Environmental Engineering @ Universidad Nacional de San Martín (UNSAM)\nDiploma in Applied Geomatics @ Instituto de Altos Estudios Espaciales Mario Gulich (CONAE - UNC)"
+    "text": "(Your text, maps, and code go here…)\n[Your text and maps go here…]"
+  },
+  {
+    "objectID": "projects_en/analysis-01.html",
+    "href": "projects_en/analysis-01.html",
+    "title": "Quality of Life Index",
+    "section": "",
+    "text": "(Your text, maps, and code go here…)\n[Your text and maps go here…]"
   },
   {
     "objectID": "projects.html",
@@ -19,6 +26,20 @@
     "title": "GIS Portfolio",
     "section": "",
     "text": "Select a category from the right to filter the projects."
+  },
+  {
+    "objectID": "projects-es.html",
+    "href": "projects-es.html",
+    "title": "GIS Portfolio",
+    "section": "",
+    "text": "QGIS\n\nCartography\n\nSOTM Latam\n\n\n\nLorem ipsum\n\n\n\nNov 15, 2019\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Carolina Byl",
+    "section": "",
+    "text": "GIS Analyst and Environmental Engineer with 4+ years of experience delivering spatial analysis, cartographic products, and cloud-based geospatial solutions for environmental and infrastructure projects. Proven background in enterprise geodatabases, remote sensing analysis using Google Earth Engine, and field data collection workflows. Programming experience in Python, SQL, and JavaScript, applied to support multidisciplinary teams in national and international contexts, including technical instruction and mentoring.\n\n\n\nBS & MS in Environmental Engineering @ Universidad Nacional de San Martín (UNSAM)\nDiploma in Applied Geomatics @ Instituto de Altos Estudios Espaciales Mario Gulich (CONAE - UNC)"
   },
   {
     "objectID": "index.html#about-me",

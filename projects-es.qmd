@@ -1,6 +1,6 @@
 ---
 title: ""
-pagetitle: "Projects"
+pagetitle: "Proyectos"
 page-layout: full
 toc: false #removes table of contents
 title-block-banner: false 
@@ -8,7 +8,7 @@ format:
   html:
     css: styles.css  # <--- Links it ONLY for this page
 listing:
-  contents: projects_en        # Folder where .qmd files live
+  contents: projects_es        # Folder where .qmd files live
   type: grid                # <--- The Magic Switch
   page-size: 20
   sort: "date desc"
@@ -20,7 +20,7 @@ listing:
   grid-item-align: left
 
 ---
-::: {.content-visible when-profile="english"}
-## Featured Work
-Select a category from the right to filter the projects.
+::: {.content-visible when-profile="espanol"}
+## Proyectos Destacados
+Seleccione una categoría del panel a la derecha para filtrar los proyectos. 
 :::

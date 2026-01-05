@@ -87,7 +87,7 @@ ul.task-list li input[type="checkbox"] {
     const options = {
       valueNames: ['listing-image','listing-date','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
       
-      searchColumns: ["listing-categories"],
+      searchColumns: ["listing-title","listing-author","listing-date","listing-image","listing-description","listing-categories"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -137,13 +137,13 @@ window.Quarto = {
 
 <link rel="stylesheet" href="styles.css">
 <meta property="og:title" content="Projects">
-<meta property="og:description" content="Portfolio de Carolina Byl">
+<meta property="og:image" content="https://cdbyl.github.io/portfolio/projects_en/images/img1.jpeg">
 <meta property="og:site_name" content="Portfolio SIG">
 <meta property="og:locale" content="es_ES">
 <meta name="twitter:title" content="Projects">
-<meta name="twitter:description" content="Portfolio de Carolina Byl">
+<meta name="twitter:image" content="https://cdbyl.github.io/portfolio/projects_en/images/img1.jpeg">
 <meta name="twitter:creator" content="@cdbyl">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:card" content="summary_large_image">
 </head>
 
 <body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
@@ -339,7 +339,7 @@ window.Quarto = {
 <span class="menu-text">Inicio</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./projects.html" aria-current="page"> 
+    <a class="nav-link" href="./projects-es.html"> 
 <span class="menu-text">Proyectos</span></a>
   </li>  
 </ul>
@@ -355,7 +355,7 @@ window.Quarto = {
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-    <h5 class="quarto-listing-category-title">Categorías</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">Todas <span class="quarto-category-count">(0)</span></div></div></div>
+    <h5 class="quarto-listing-category-title">Categorías</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">Todas <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Q2FydG9ncmFwaHk=">Cartography <span class="quarto-category-count">(1)</span></div><div class="category" data-category="UUdJUw==">QGIS <span class="quarto-category-count">(1)</span></div><div class="category" data-category="U09UTSUyMExhdGFt">SOTM Latam <span class="quarto-category-count">(1)</span></div></div></div>
 <!-- main -->
 <main class="content column-page-left" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
 
@@ -363,17 +363,39 @@ window.Quarto = {
 
 
 
-<section id="proyectos-destacados" class="level2">
-<h2 class="anchored" data-anchor-id="proyectos-destacados">Proyectos destacados</h2>
-<p>Seleccione una categoría de la derecha para filtrar los proyectos.</p>
 
 
 
-</section>
 
 <div class="quarto-listing quarto-listing-container-grid" id="listing-listing">
 <div class="list grid quarto-listing-cols-3">
+<div class="g-col-1" data-index="0" data-categories="UUdJUyUyQ0NhcnRvZ3JhcGh5JTJDU09UTSUyMExhdGFt" data-listing-date-sort="1573786800000" data-listing-file-modified-sort="1767583903823" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="12">
+<a href="./projects_en/analysis-01.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top">
+<img loading="lazy" src="./projects_en/images/img1.jpeg" class="thumbnail-image card-img" style="height: 200px;">
+</p>
+<div class="card-body post-contents">
+<div class="listing-categories">
 
+<div class="listing-category" onclick="window.quartoListingCategory('UUdJUw=='); return false;">QGIS</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('Q2FydG9ncmFwaHk='); return false;">Cartography</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('U09UTSUyMExhdGFt'); return false;">SOTM Latam</div>
+
+</div>
+<div class="card-text listing-description delink">
+<p>Applying ACUMAR’s Quality of Life Index (ICV) —which assesses well-being across housing, education, health, and environment— to the neighbor Reconquista River Basin, based…</p>
+</div>
+<div class="card-attribution card-text-small end">
+<div class="listing-date">
+15 nov 2019
+</div>
+</div>
+</div>
+</div></a>
+</div>
 </div>
 <div class="listing-no-matching d-none">No hay resultados</div>
 </div></main> <!-- /main -->

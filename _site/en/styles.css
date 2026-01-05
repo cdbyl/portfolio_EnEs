@@ -10,30 +10,31 @@ div.quarto-listing-category {
     margin-top: 10px !important; /* Small gap between Title and List */
 }
 
-/* Allow the links container to wrap content */
-.about-links {
-  flex-wrap: wrap !important;
-  justify-content: center; /* Keeps everything centered */
-}
-
 /* Target ONLY the last link (the location) */
 .about-links .about-link:last-of-type {
-  flex-basis: 100%;     /* Forces it to take full width, pushing it to a new line */
-  margin-top: 15px;     /* Adds the "one or two lines below" spacing */
+  /* Force it to own the whole row */
+  flex-basis: 100% !important;
+  width: 100% !important;       /* Added: Ensures it takes full width on all devices */
+  display: block !important;    /* Added: Forces it to behave like a block text line */
   
-  /* Remove the button "rectangle" styling */
+  /* Spacing */
+  margin-top: 15px;
+  margin-left: 0 !important;    /* Added: Resets any auto-margins pushing it right */
+  
+  /* Text & Look */
+  text-align: center;           /* Added: Centers the text inside the 100% width */
   border: none !important;
   box-shadow: none !important;
   background-color: transparent !important;
-  
-  /* Styling the text/icon to look plain */
-  color: inherit;       /* Uses your theme's text color */
-  text-transform: none; /* Prevents uppercase if your theme defaults to it */
-  pointer-events: none; /* Optional: makes it unclickable since it's just a label */
+  color: inherit;
+  text-transform: none;
+  pointer-events: none;
 }
 
-/* Optional: Ensure no hover effect on the location */
-.about-links .about-link:last-of-type:hover {
-  background-color: transparent !important;
-  color: inherit !important;
+/* Target the left sidebar in Trestles */
+.quarto-about-trestles .about-entity {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centers content vertically */
+  min-height: 60vh;        /* Ensures there is enough height to center within */
 }
