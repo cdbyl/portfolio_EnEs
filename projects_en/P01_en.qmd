@@ -54,8 +54,8 @@ config:
     padding: 5
 ---
 flowchart TD
-    C(Basin Boundary) -->|Crop| B(Mask) --> Y
-    A(Water courses) -->|Crop| Y
+    C(Basin Boundary) -->|Clip| B(Mask) --> Y
+    A(Water courses) -->|Clip| Y
     D(Census radii) --> |Selection of housing variables| E(Housing Index raw data) --> |Operations| F(Housing Index) --> Y
     G(Public health establishments) --> |Buffer, dissolve| H(Health Index)
     I(Static waste disposal map) --> |Digitalization from satellite images| J(Waste disposal locations) --> |Buffer and scoring by distance| H --> Y

@@ -62,5 +62,20 @@
   },
   "projects_en/P11_en.qmd": {
     "P11_en.html": "4d9e8e0d"
+  },
+  "shapefiles/ecobici_estaciones.qmd": {
+    "ecobici_estaciones.html": "b1ffda96"
+  },
+  "shapefiles/ciclovias.qmd": {
+    "ciclovias.html": "b76b2c8b"
+  },
+  "shapefiles/rutas_actual.qmd": {
+    "rutas_actual.html": "6ec671e0"
+  },
+  "shapefiles/puntos_ruteo.qmd": {
+    "puntos_ruteo.html": "26f3e258"
+  },
+  "shapefiles/rutas_propuesta.qmd": {
+    "rutas_propuesta.html": "d3877f8a"
   }
 }

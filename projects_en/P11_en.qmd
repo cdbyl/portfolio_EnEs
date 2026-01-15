@@ -33,8 +33,108 @@ lorem ipsum
 
 library(sf)
 library(leaflet)
+library(tools)
 
-# lorem ipsum
+# 1. LOAD & CLEAN DATA
+sf_use_s2(FALSE)
+folder_path <- "../shapefiles"
+all_files <- list.files(path = folder_path, pattern = "\\.geojson$", full.names = TRUE)
+files_to_load <- all_files[basename(all_files) != "red_vial.geojson"]
+# Stop if no files found (prevents empty map)
+if (length(files_to_load) == 0) stop("CRITICAL ERROR: No .geojson files found in folder!")
+
+# 2. INITIALIZE MAP (With your custom basemap)
+m <- leaflet() %>%
+  setView(lng = -58.44, lat = -34.61, zoom = 12) %>%
+  addTiles(
+    urlTemplate = "https://wms.ign.gob.ar/geoserver/gwc/service/tms/1.0.0/capabaseargenmap@EPSG%3A3857@png/{z}/{x}/{-y}.png",
+    attribution = "Argenmap - IGN Argentina",
+    options = tileOptions(tms = FALSE)
+  )
+
+# # 3. PREPARE COLORS AND CATEGORIES
+# custom_colors <- c(
+#   "ecobici_estaciones" = "lightpink",
+#   "rutas_propuesta"     = "red",
+#   "rutas_actual"     = "darkturquoise",
+#   "puntos_ruteo"     = "gold",
+#   "ciclovias_doble"     = "darkgreen",
+#   "ciclovias_unica"     = "purple",
+#   "ciclovias_propuesta" = "darkorange"
+# )
+
+# 3. LOOP AND STYLE
+layer_names <- c()
+
+for (file_path in files_to_load) {
+  
+  # --- A. Read Data ---
+  layer_data <- st_read(file_path, quiet = TRUE)
+  file_name  <- file_path_sans_ext(basename(file_path))
+  layer_names <- c(layer_names, file_name)
+  
+  # --- B. DEFINE STYLE LOGIC (Edit this part!) ---
+  
+  # Defaults (Applied if no specific rule exists)
+  my_color  <- "blue"
+  my_weight <- 2
+  my_radius <- 4
+  my_dash   <- NULL  # Default: Solid line (No dash)
+
+  # Rule 1: Simple Style for specific layers
+  if (file_name == "ecobici_estaciones") {
+    my_color  <- "lightpink"
+    my_weight <- 3
+  } 
+  else if (file_name == "rutas_propuesta") {
+    my_color  <- "darkturquoise"
+    my_dash   <- "5, 10"  # <--- DASHED LINE (5px line, 10px gap)
+  }
+  else if (file_name == "rutas_actual") {
+    my_color  <- "red"
+    my_dash   <- "5, 10"  # <--- DASHED LINE (5px line, 10px gap)
+  }
+  
+  # Rule 2: Attribute-Based Style (The complex part)
+  # Example: If the file is "zoning", color by the "Type" column
+  else if (file_name == "ciclovias") {
+      if ("direction" %in% names(layer_data)) {
+          pal <- colorFactor(palette = "Set1", domain = layer_data$direction)
+          my_color <- pal(layer_data$direction)
+      }
+    }
+  
+  # --- C. Detect Geometry & Add Layer ---
+  geom_type <- as.character(st_geometry_type(layer_data)[1])
+  
+  if (grepl("POINT", geom_type)) {
+    m <- m %>% addCircleMarkers(
+      data = layer_data,
+      group = file_name,
+      color = my_color,
+      radius = my_radius,
+      fillOpacity = 0.8,
+      stroke = FALSE
+      # No popup argument here
+    )
+  } else if (grepl("LINE", geom_type)) {
+    m <- m %>% addPolylines(
+      data = layer_data,
+      group = file_name,
+      color = my_color,
+      weight = my_weight,
+      dashArray = my_dash, # <--- Applies the dash style here
+      opacity = 0.8
+      # No popup argument here
+    )
+  } 
+}
+
+# 4. CONTROLS
+m %>% addLayersControl(
+  overlayGroups = layer_names,
+  options = layersControlOptions(collapsed = FALSE)
+)
 ```
 
 ## The final map for Day 26
