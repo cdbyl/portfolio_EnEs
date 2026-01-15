@@ -3,7 +3,7 @@ title: "Burn severity for Delta del Paraná, Argentina"
 description: "Created for Day 15 (Fire) of the [#30daymapchallenge](https://30daymapchallenge.com/), this project shows the dNBR over the Paraná Delta before and after the 2020 wildfires."
 date: "2025-11-15"
 lang: en
-categories: [30 day map challenge, Remote Sensing, Cartography, QGIS]
+categories: [30 day map challenge, Remote Sensing]
 image: ../images/P08_cover.png
 format:
   html:
@@ -142,10 +142,9 @@ addLegend(
 ```
 </details>
 
-## The completed challenge for Day 15
+## The final map for Day 15
 
 ::: {.text-center}
-
 ![](../images/P08_map1.png){width=100% class="lightbox"}
 
 ![](../images/P08_map2.png){width=100% class="lightbox"}

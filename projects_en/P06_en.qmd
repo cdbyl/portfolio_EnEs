@@ -3,7 +3,7 @@ title: "Carbon monoxide concentration in Delta del Paraná, Argentina"
 description: "Created for Day 10 (Air) of the [#30daymapchallenge](https://30daymapchallenge.com/), this project shows the CO levels over the Paraná Delta during the 2020 wildfires vs. 2022 values."
 date: "2025-11-10"
 lang: en
-categories: [30 day map challenge, Remote Sensing, Cartography, QGIS]
+categories: [30 day map challenge, Remote Sensing]
 image: ../images/P06_cover.png
 format:
   html:
@@ -114,7 +114,7 @@ Map.addLayer(image2, vizParams, 'CO Level - 2022');
 ```
 </details>
 
-## The completed challenge for Day 10
+## The final map for Day 10
 
 ::: {.text-center}
 

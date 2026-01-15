@@ -3,7 +3,7 @@ title: "Hydrographic basins in Buenos Aires City"
 description: "Created for Day 20 (Water) of the [#30daymapchallenge](https://30daymapchallenge.com/), this project shows hidden watercourses in Buenos Aires City."
 date: "2025-11-20"
 lang: en
-categories: [30 day map challenge, Cartography, QGIS]
+categories: [30 day map challenge]
 image: ../images/P09_cover.png
 format:
   html:
@@ -35,7 +35,7 @@ This map shows watercourses of Buenos Aires, which are hidden in tunnels beneath
 ****
 * Made with ![](../images/QGIS.png){width=1em style="vertical-align: middle;"}[GIS](https://qgis.org/project/overview/) 3.22.4-Białowieża
 
-## The completed challenge for Day 20
+## The final map for Day 20
 
 ::: {.text-center}
 

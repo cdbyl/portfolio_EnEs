@@ -3,7 +3,7 @@ title: "Minimalist map of an Argentinian town"
 description: "Created for Day 11 (Minimal map) of the [#30daymapchallenge](https://30daymapchallenge.com/), this project shows the minimum elements to describe a city"
 date: "2025-11-11"
 lang: en
-categories: [30 day map challenge, Cartography, QGIS]
+categories: [30 day map challenge]
 image: ../images/P07_cover.jpeg
 format:
   html:
@@ -21,7 +21,7 @@ This map was produced using the most simple and minimalistic symbology I could: 
 ****
 * Made with ![](../images/QGIS.png){width=1em style="vertical-align: middle;"}[GIS](https://qgis.org/project/overview/) 3.22.4-Białowieża
 
-## The completed challenge for Day 11
+## The final map for Day 11
 
 ::: {.text-center}
 

@@ -3,7 +3,7 @@ title: "Contour lines for Pampa Linda, Río Negro, Argentina"
 description: "Created for Day 2 (Lines) of the [#30daymapchallenge](https://30daymapchallenge.com/), this project visualizes the relief with all of it's ups-and-downs in Pampa Linda, Argentina."
 date: "2025-11-02"
 lang: en
-categories: [30 day map challenge, Cartography, QGIS]
+categories: [30 day map challenge]
 image: ../images/P03_cover.png
 format:
   html:
@@ -32,7 +32,7 @@ It is the highest and most prominent mountain in Nahuel Huapi National Park, sta
 ****
 * Made with ![](../images/QGIS.png){width=1em style="vertical-align: middle;"}[GIS](https://qgis.org/project/overview/) 3.22.4-Białowieża
 
-## The completed challenge for Day 2
+## The final map for Day 2
 
 ::: {.text-center}
 

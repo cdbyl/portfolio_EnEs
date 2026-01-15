@@ -3,7 +3,7 @@ title: "Quality of Life Index"
 description: "Application of ACUMAR’s Quality of Life Index (ICV/QLI) to the neighbor Reconquista River Basin, based on the region's strong geographic and socioeconomic similarities to the originally studied Matanza-Riachuelo basin."
 date: "2019-11-15"
 lang: en
-categories: [QGIS, Cartography, SOTM Latam]
+categories: [State of the Map Latam]
 image: ../images/P01_cover.png  
 format:
   html:

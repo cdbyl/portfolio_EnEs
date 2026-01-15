@@ -47,5 +47,20 @@
   },
   "projects_en/P09_en.qmd": {
     "P09_en.html": "01fb4de3"
+  },
+  "projects_en/P10_en.qmd": {
+    "P10_en.html": "9a39ef9d"
+  },
+  "shapefiles/red_vial_PERGAMINO.qmd": {
+    "red_vial_PERGAMINO.html": "a0707548"
+  },
+  "shapefiles/red_vial.qmd": {
+    "red_vial.html": "d7b006e4"
+  },
+  "projects_en/P12_en.qmd": {
+    "P12_en.html": "17c095f9"
+  },
+  "projects_en/P11_en.qmd": {
+    "P11_en.html": "4d9e8e0d"
   }
 }

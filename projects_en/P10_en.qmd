@@ -1,0 +1,106 @@
+---
+title: "Street names of Pergamino"
+description: "Created for Day 24 (Places and their names) of the [#30daymapchallenge](https://30daymapchallenge.com/), this map shows the street names for Pergamino city in Buenos Aires Province, Argentina"
+date: "2025-11-24"
+lang: en
+categories: [30 day map challenge]
+image: ../images/P10_cover.png
+format:
+  html:
+    code-fold: true 
+---
+****
+## Project Overview
+
+:::{.text-justify}
+I chose the city of Pergamino in Buenos Aires, Argentina for this toponym-based challenge because its robust [spatial data infrastructure](https://en.wikipedia.org/wiki/Spatial_data_infrastructure) provided access to complete street name data, which I categorized as follows:
+
+* Commemorative dates
+* Male figures
+* Female figures
+* Geographical places
+* Nature (animals, plants, or bodies of water)
+* Unclassified/other: including numbered roads and abstract concepts like "Sovereignty", and names I couldn’t confidently classify.
+
+:::
+## Data Sources and Tools
+
+* Streets: [IDE Pergamino](https://ide.pergamino.gob.ar/#)
+* Basemap: [Argenmap by National Geography Institute of Argentina](https://www.ign.gob.ar/AreaServicios/Argenmap/Introduccion)
+
+****
+* Made with ![](../images/QGIS.png){width=1em style="vertical-align: middle;"}[GIS](https://qgis.org/project/overview/) 3.22.4-Białowieża
+
+## Interactive map
+```{r}
+#| echo: true
+#| code-summary: "Click to view the code"
+#| warning: false
+#| message: false
+
+library(sf)
+library(leaflet)
+
+# 1. LOAD & CLEAN DATA
+sf_use_s2(FALSE)
+streets <- st_read("../shapefiles/red_vial.geojson" , quiet = TRUE)
+streets <- st_zm(streets) 
+
+# 2. PREPARE COLORS AND CATEGORIES
+labels_map <- c(
+  "Fecha" = "Commemorated Dates",
+  "L"     = "Geographic Places",
+  "H"     = "Male Names",
+  "M"     = "Female Names",
+  "O"     = "Unclassified / Other",
+  "N"     = "Nature (Plants/Animals)"
+)
+
+streets$CATE <- ifelse(streets$CATE %in% names(labels_map), labels_map[streets$CATE], "Unclassified / Other")
+streets$CATE[is.na(streets$CATE)] <- "Unclassified / Other"
+
+cate_palette <- c(
+  "Commemorated Dates"      = "#f2eb19",
+  "Geographic Places"       = "#6e4eed",
+  "Male Names"              = "#3badde",
+  "Female Names"            = "#f762e3",
+  "Nature (Plants/Animals)" = "#4cc630",
+  "Unclassified / Other"    = "#dc6f35"
+)
+
+streets$CATE <- factor(streets$CATE, levels = names(cate_palette))
+pal_cate <- colorFactor(palette = cate_palette, domain = streets$CATE)
+
+# 3. RENDER MAP
+leaflet(streets) %>%
+  setView(lng = -60.57, lat = -33.89, zoom = 13) %>%
+  addTiles(
+    urlTemplate = "https://wms.ign.gob.ar/geoserver/gwc/service/tms/1.0.0/capabaseargenmap@EPSG%3A3857@png/{z}/{x}/{-y}.png",
+    attribution = "Argenmap - IGN Argentina",
+    options = tileOptions(tms = FALSE)
+  ) %>%
+  addPolylines(
+    color = ~pal_cate(CATE),
+    weight = 2,
+    opacity = 0.7,
+    popup = ~paste(
+      "<b>Street Name:</b>", nombre, "<br>",
+      "<b>Category:</b>", CATE
+    ),
+    highlightOptions = highlightOptions(
+      weight = 7, color = "white", bringToFront = TRUE
+    )
+  ) %>%
+  addLegend(
+    position = "bottomright",
+    pal = pal_cate,
+    values = ~CATE,
+    title = "Legend"
+  )
+```
+
+## The final map for Day 24
+::: {.text-center}
+![](../images/P10_map.png){width=100% class="lightbox"}
+:::
+

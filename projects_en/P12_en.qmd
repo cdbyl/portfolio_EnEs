@@ -1,0 +1,74 @@
+---
+title: "Night lights, railways and settlements"
+description: "Created for Day 28 (Black) of the [#30daymapchallenge](https://30daymapchallenge.com/), the relationship between settlement locations and railway tracks."
+date: "2025-11-28"
+lang: en
+categories: [30 day map challenge, Remote Sensing]
+image: ../images/P12_cover.png
+format:
+  html:
+    code-fold: true 
+---
+****
+## Project Overview
+
+:::{.text-justify}
+This visualization overlays annual VIIRS night light data onto the railway network of Buenos Aires Province. 
+
+The high contrast of nighttime imagery highlights a distinct spatial correlation: urban settlements align closely with railway corridors, a pattern that persists even along lines that have been abandoned. 
+
+This relationship underscores the historical influence of rail infrastructure on the region's urbanization and suggests significant potential for reactivating these corridors to enhance sustainable logistics and regional connectivity.
+:::
+
+## Data Sources and Tools
+
+* NOAA's [VIIRS Nighttime Day/Night Annual Band Composites V2.2](https://developers.google.com/earth-engine/datasets/catalog/NOAA_VIIRS_DNB_ANNUAL_V22) with Google Earth Engine
+* Settlements: [Argentine Settlements Database (BAHRA)](http://www.bahra.gob.ar/)
+* Railroads: OpenStreetMap, using [QuickOSM plugin](https://plugins.qgis.org/plugins/QuickOSM/#plugin-details) in QGIS
+
+****
+* Made with ![](../images/QGIS.png){width=1em style="vertical-align: middle;"}[GIS](https://qgis.org/project/overview/) 3.22.4-Białowieża
+
+## Google Earth Engine code
+
+<details>
+<summary>Click to view</summary>
+
+```javascript {filename="GEE Script Day 28-Black"}
+// 1. Load  ROI to map from assets
+Map.addLayer(roi);
+Map.centerObject(roi);
+
+// 2. Define date range
+var date = ee.DateRange('2024-01-01', '2025-12-31');
+
+// 3. Import dataset and process
+var dataset = ee.ImageCollection('NOAA/VIIRS/DNB/ANNUAL_V22')
+                  .filter(ee.Filter.date(date))
+                  .filterBounds(roi);
+                  
+var nighttime = dataset.select('average_masked');
+var nighttime_image = nighttime.median().clip(poi);
+
+// 4. Set visualization parameters
+var nighttimeVis = {min: 0.0, max: 60.0};
+Map.addLayer(nighttime_image, nighttimeVis, 'Nighttime');
+
+// 5. Raster was exported to produce the map
+Export.image.toDrive({
+  image: nighttime_image.select('average_masked'),
+  description: 'Nighttime',
+  folder: 'Nighttime_exports',
+  region: roi.geometry(),
+  scale: 100,
+  maxPixels: 1e13
+});
+```
+</details>
+
+## The final map for Day 28
+
+::: {.text-center}
+![](../images/P12_map.png){width=100% class="lightbox"}
+:::
+

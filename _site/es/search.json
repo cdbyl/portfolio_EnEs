@@ -35,11 +35,11 @@
     "text": "Data Sources and Tools\n\nWatercourses and tunnels, hydrographic basins: IDECABA\nBasemap: CARTO Voyager\n\n\n\nMade with GIS 3.22.4-Białowieża"
   },
   {
-    "objectID": "projects_en/P09_en.html#the-completed-challenge-for-day-20",
-    "href": "projects_en/P09_en.html#the-completed-challenge-for-day-20",
+    "objectID": "projects_en/P09_en.html#the-final-map-for-day-20",
+    "href": "projects_en/P09_en.html#the-final-map-for-day-20",
     "title": "Hydrographic basins in Buenos Aires City",
-    "section": "The completed challenge for Day 20",
-    "text": "The completed challenge for Day 20"
+    "section": "The final map for Day 20",
+    "text": "The final map for Day 20"
   },
   {
     "objectID": "projects_en/P03_en.html#project-overview",
@@ -56,39 +56,165 @@
     "text": "Data Sources and Tools\n\nDEM SRTM with ~90m pixel resolution, obtained with OpenTopography DEM Downloader Plugin\nPeaks, international boundary, settlements, water courses and bodies: National Geography Institute of Argentina\n\n\n\nMade with GIS 3.22.4-Białowieża"
   },
   {
-    "objectID": "projects_en/P03_en.html#the-completed-challenge-for-day-2",
-    "href": "projects_en/P03_en.html#the-completed-challenge-for-day-2",
+    "objectID": "projects_en/P03_en.html#the-final-map-for-day-2",
+    "href": "projects_en/P03_en.html#the-final-map-for-day-2",
     "title": "Contour lines for Pampa Linda, Río Negro, Argentina",
-    "section": "The completed challenge for Day 2",
-    "text": "The completed challenge for Day 2"
+    "section": "The final map for Day 2",
+    "text": "The final map for Day 2"
   },
   {
-    "objectID": "projects_en/P02_en.html#project-overview",
-    "href": "projects_en/P02_en.html#project-overview",
-    "title": "London plane trees in Buenos Aires City",
+    "objectID": "projects_en/P06_en.html#project-overview",
+    "href": "projects_en/P06_en.html#project-overview",
+    "title": "Carbon monoxide concentration in Delta del Paraná, Argentina",
     "section": "Project Overview",
-    "text": "Project Overview\nLondon plane trees release their seeds in spring. Since they are so abundant in Buenos Aires City, the season is noticeable by almost everyone due to the annoyance of frequent sneezing and seeds getting into one’s eyes.\n\n\n\n\n\n\nPlatanus x hispanica leaves and fruits\n\n\n\n\n\n\n\nFruit and seeds"
+    "text": "Project Overview\n\n\nSentinel-5P (TROPOMI) dataset was used to visualize carbon monoxide (CO) levels over the Paraná Delta (Argentina) during the 2020 wildfires, compared with 2022 values.\nRemote sensing, in this case, makes it possible to detect fires through atmospheric gases and helps us understand how these events affect not only ecosystems but also nearby cities and communities.\n\n\n\n\nFiremen aiding at the wildfires in 2020.\n\n\n\n\n\nThis work was part of the course “Geostationary Satellites and their Applications to Hydrometeorology”, which I completed at the Gulich Institute (UNC–CONAE) in late 2024."
   },
   {
-    "objectID": "projects_en/P02_en.html#data-sources-and-tools",
-    "href": "projects_en/P02_en.html#data-sources-and-tools",
-    "title": "London plane trees in Buenos Aires City",
+    "objectID": "projects_en/P06_en.html#data-sources-and-tools",
+    "href": "projects_en/P06_en.html#data-sources-and-tools",
+    "title": "Carbon monoxide concentration in Delta del Paraná, Argentina",
     "section": "Data Sources and Tools",
-    "text": "Data Sources and Tools\n\n2017/2018 Urban Tree Census, available on IDECABA\nTrees in streets and parks: IDECABA\nParks and other green spaces: IDECABA\nBasemap: CARTO Voyager\n\n\n\nMade with GIS 3.22.4-Białowieża"
+    "text": "Data Sources and Tools\n\nESA’s Sentinel-5P (TROPOMI) with Google Earth Engine\nProvince boundaries: National Geography Institute of Argentina\nBasemap: Argenmap by National Geography Institute of Argentina\n\n\n\nMade with GIS 3.22.4-Białowieża"
   },
   {
-    "objectID": "projects_en/P02_en.html#the-completed-challenge-for-day-1",
-    "href": "projects_en/P02_en.html#the-completed-challenge-for-day-1",
-    "title": "London plane trees in Buenos Aires City",
-    "section": "The completed challenge for Day 1",
-    "text": "The completed challenge for Day 1"
+    "objectID": "projects_en/P06_en.html#google-earth-engine-code",
+    "href": "projects_en/P06_en.html#google-earth-engine-code",
+    "title": "Carbon monoxide concentration in Delta del Paraná, Argentina",
+    "section": "Google Earth Engine code",
+    "text": "Google Earth Engine code\n\n\nClick to view\n\n\n\nGEE Script Day 10-Air\n\n//1. Add Region of Interest (roi) from assets\nMap.addLayer(roi.style({color: 'purple', fillColor: '00000000', width: 2}), {}, 'ROI');\n\n// 2. Define dates\nvar date1_start = '2020-07-01';\nvar date1_end   = '2020-07-31'; \n\nvar date2_start = '2022-07-01';\nvar date2_end   = '2022-07-31';\n\n// 3. Define palette and create legend\nvar vizParams = {\n  min: 0.0197,\n  max: 0.037,\n  palette: ['#fff7ec', '#fee8c8', '#fdd49e', '#fdbb84', '#fc8d59', '#ef6548', '#d7301f', '#b30000', '#7f0000']\n};\n\n// 4. Load the TROPOMI CO collection and filter\nvar image1 = ee.ImageCollection('COPERNICUS/S5P/OFFL/L3_CO')\n  .select('CO_column_number_density').filterDate(date1_start, date1_end).mean().clip(roi);\nvar image2 = ee.ImageCollection('COPERNICUS/S5P/OFFL/L3_CO')\n  .select('CO_column_number_density').filterDate(date2_start, date2_end).mean().clip(roi);\n\n// 5. Visualization in GEE with legend\n// 5.1. Legend function\nfunction addLegend(title, palette, min, max, labels) {\n  var legend = ui.Panel({\n    style: {\n      position: 'bottom-left',\n      padding: '8px 15px'\n    }\n  });\n  var legendTitle = ui.Label({\n    value: title,\n    style: {\n      fontWeight: 'bold',\n      fontSize: '14px',\n      margin: '0 0 4px 0',\n      color: 'black'\n    }\n  });\n  legend.add(legendTitle);\n  var lon = ee.Image.pixelLonLat().select('longitude');\n  var gradient = lon.multiply((max - min) / 100.0).add(min);\n  var legendImage = gradient.visualize({min: min, max: max, palette: palette});\n  var thumbnail = ui.Thumbnail({\n    image: legendImage,\n    params: {bbox: [0, 0, 100, 10], dimensions: '200x20'},\n    style: {margin: '4px 0'}\n  });\n  legend.add(thumbnail);\n  var labelPanel = ui.Panel({\n    widgets: [\n      ui.Label(labels[0], {margin: '0 8px'}),\n      ui.Label(labels[1], {margin: '0 8px', textAlign: 'right', stretch: 'horizontal'})\n    ],\n    layout: ui.Panel.Layout.flow('horizontal')\n  });\n\n  legend.add(labelPanel);\n  Map.add(legend);\n}\n// 5.2. Final viz\naddLegend('CO (mol/m²)', vizParams.palette, vizParams.min, vizParams.max, [vizParams.min, vizParams.max]);\nMap.centerObject(roi);\nMap.addLayer(image1, vizParams, 'CO Level - 2020');\nMap.addLayer(image2, vizParams, 'CO Level - 2022');"
   },
   {
-    "objectID": "projects_en/P02_en.html#results-and-analysis",
-    "href": "projects_en/P02_en.html#results-and-analysis",
-    "title": "London plane trees in Buenos Aires City",
-    "section": "Results and analysis",
-    "text": "Results and analysis\nThe comunas with the most plane trees are:\n\nComuna 15: Agronomía, Paternal, Parque Chas, Chacarita, Villa Crespo, Villa Ortúzar\nComuna 11: Villa del Parque, Villa Devoto, Villa Gral. Mitre, Villa Santa Rita\nComuna 14: Palermo"
+    "objectID": "projects_en/P06_en.html#the-final-map-for-day-10",
+    "href": "projects_en/P06_en.html#the-final-map-for-day-10",
+    "title": "Carbon monoxide concentration in Delta del Paraná, Argentina",
+    "section": "The final map for Day 10",
+    "text": "The final map for Day 10"
+  },
+  {
+    "objectID": "projects_en/P05_en.html#project-overview",
+    "href": "projects_en/P05_en.html#project-overview",
+    "title": "Spatiotemporal visualization of urban growth in Tigre, Buenos Aires, Argentina",
+    "section": "Project Overview",
+    "text": "Project Overview\n\n\nFor this map I compared the images from 1984 and 2011 from Tigre (Buenos Aires, Argentina), an area that underwent massive urban transformations.\nDuring this period, numerous gated communities were built over former wetlands, altering the natural landscape with artificial lagoons and geometric layouts that sharply contrast with the original vegetation and terrain, which can be seen in the cartography.\n\n\n\n\nCapybaras never left the wetlands even though they changed drastically\n\n\n\n\n\nThe band combination used highlights urban areas in pink and purple tones, vegetation in green, and water bodies in dark blue or black. These compositions help visually identify qualitative patterns and serve as a first step before applying quantitative methods, such as spectral indices."
+  },
+  {
+    "objectID": "projects_en/P05_en.html#data-sources-and-tools",
+    "href": "projects_en/P05_en.html#data-sources-and-tools",
+    "title": "Spatiotemporal visualization of urban growth in Tigre, Buenos Aires, Argentina",
+    "section": "Data Sources and Tools",
+    "text": "Data Sources and Tools\n\nLevel 2 Landsat 5 images from July 1984 and August 2011.\n\nSWIR (~2140 nm), NIR (~830 nm) and Red (~660 nm) bands were shown for RGB respectively.\nThe raster resolution is 30 m.\n\n\n\n\nMade with GIS 3.22.4-Białowieża"
+  },
+  {
+    "objectID": "projects_en/P05_en.html#the-final-map-for-day-8",
+    "href": "projects_en/P05_en.html#the-final-map-for-day-8",
+    "title": "Spatiotemporal visualization of urban growth in Tigre, Buenos Aires, Argentina",
+    "section": "The final map for Day 8",
+    "text": "The final map for Day 8"
+  },
+  {
+    "objectID": "projects_en/P11_en.html#project-overview",
+    "href": "projects_en/P11_en.html#project-overview",
+    "title": "Bike lanes in Buenos Aires City",
+    "section": "Project Overview",
+    "text": "Project Overview\n\nlorem ipsum"
+  },
+  {
+    "objectID": "projects_en/P11_en.html#data-sources-and-tools",
+    "href": "projects_en/P11_en.html#data-sources-and-tools",
+    "title": "Bike lanes in Buenos Aires City",
+    "section": "Data Sources and Tools",
+    "text": "Data Sources and Tools\n\nBike lanes and EcoBici stations: IDECABA\nBasemap: Argenmap by National Geography Institute of Argentina\n\n\n\nMade with GIS 3.22.4-Białowieża"
+  },
+  {
+    "objectID": "projects_en/P11_en.html#interactive-map",
+    "href": "projects_en/P11_en.html#interactive-map",
+    "title": "Bike lanes in Buenos Aires City",
+    "section": "Interactive map",
+    "text": "Interactive map\n\n\nClick to view the code\nlibrary(sf)\nlibrary(leaflet)\n\n# lorem ipsum"
+  },
+  {
+    "objectID": "projects_en/P11_en.html#the-final-map-for-day-26",
+    "href": "projects_en/P11_en.html#the-final-map-for-day-26",
+    "title": "Bike lanes in Buenos Aires City",
+    "section": "The final map for Day 26",
+    "text": "The final map for Day 26"
+  },
+  {
+    "objectID": "projects_en/P08_en.html#project-overview",
+    "href": "projects_en/P08_en.html#project-overview",
+    "title": "Burn severity for Delta del Paraná, Argentina",
+    "section": "Project Overview",
+    "text": "Project Overview\n\nThe wildfires in the Paraná Delta, Argentina - previously studied for Day 10 challenge - were brought up again to analyze from the point of view of its vegetation.\nSentinel-2 imagery was used in Google Earth Engine to calculate NDVI before and after the fire, highlighting the presence and condition of the vegetation immediately prior to and following the events. Using these NDVI values, dNBR was also computed, an index commonly used to estimate burn severity.\nNegative NDVI values were masked and interpreted as water bodies or watercourses."
+  },
+  {
+    "objectID": "projects_en/P08_en.html#data-sources-and-tools",
+    "href": "projects_en/P08_en.html#data-sources-and-tools",
+    "title": "Burn severity for Delta del Paraná, Argentina",
+    "section": "Data Sources and Tools",
+    "text": "Data Sources and Tools\n\nESA’s Harmonized Sentinel-2 (MSI) with Google Earth Engine\nProvince boundaries: National Geography Institute of Argentina\nBasemap: Argenmap by National Geography Institute of Argentina\n\n\n\nMade with GIS 3.22.4-Białowieża"
+  },
+  {
+    "objectID": "projects_en/P08_en.html#google-earth-engine-code",
+    "href": "projects_en/P08_en.html#google-earth-engine-code",
+    "title": "Burn severity for Delta del Paraná, Argentina",
+    "section": "Google Earth Engine code",
+    "text": "Google Earth Engine code\n\n\nClick to view\n\n\n\nGEE Script Day 15-Fire\n\n// 1. Load ROI\nMap.addLayer(roi.style({color: 'purple', fillColor: '00000000', width: 2}), {}, 'ROI');\n\n// 2. Define dates for before and after the fires\nvar date1 = ee.DateRange('2019-12-01', '2019-12-31');\nvar date2 = ee.DateRange('2020-09-01', '2020-09-30');\n\n// 3. Load Sentinel-2 imagery, filter by cloud % and roi bounds\nvar s2_pre = ee.ImageCollection('COPERNICUS/S2_SR_HARMONIZED')\n  .filterDate(date1)\n  .filterBounds(roi)\n  .filterMetadata('CLOUDY_PIXEL_PERCENTAGE', 'less_than', 30) // 30% clouds max\n  .median()\n  .clip(roi);\n\nvar s2_post = ee.ImageCollection('COPERNICUS/S2_SR_HARMONIZED')\n  .filterDate(date2)\n  .filterBounds(roi)\n  .filterMetadata('CLOUDY_PIXEL_PERCENTAGE', 'less_than', 30)\n  .median()\n  .clip(roi);\n\n// 4. Calculate NDVI\nvar ndvi_pre = s2_pre.normalizedDifference(['B8', 'B4']).rename('NDVI_pre');\nvar ndvi_post = s2_post.normalizedDifference(['B8', 'B4']).rename('NDVI_post');\n\n// 5. Calculate NBR and dNBR\nvar nbr_pre = s2_pre.normalizedDifference(['B8', 'B12']).rename('NBR_pre');\nvar nbr_post = s2_post.normalizedDifference(['B8', 'B12']).rename('NBR_post');\nvar dnbr = nbr_pre.subtract(nbr_post).rename('dNBR');\n\n// 6. Establish visualization parameters\nvar ndviParams = {min: 0, max: 1, palette: ['brown','yellow','green']};\nvar dnbrParams = {min: -0.5, max: 0.5, palette: ['blue','white','red']};\n\n// 7. Plot map\nMap.centerObject(roi);\nMap.addLayer(ndvi_pre, ndviParams, 'NDVI pre-incendios');\nMap.addLayer(ndvi_post, ndviParams, 'NDVI post-incendios');\nMap.addLayer(dnbr, dnbrParams, 'dNBR pre-post');\n\n// 7.1 Legend function\nfunction addLegend(title, palette, min, max, labels) {\n  var legend = ui.Panel({\n    style: {\n      position: 'bottom-left',\n      padding: '8px 15px'\n    }\n  });\n\n  var legendTitle = ui.Label({\n    value: title,\n    style: {\n      fontWeight: 'bold',\n      fontSize: '14px',\n      margin: '0 0 4px 0',\n      color: 'black'\n    }\n  });\n\n  legend.add(legendTitle);\n\n  var lon = ee.Image.pixelLonLat().select('longitude');\n  var gradient = lon.multiply((max - min) / 100.0).add(min);\n  var legendImage = gradient.visualize({min: min, max: max, palette: palette});\n\n  var thumbnail = ui.Thumbnail({\n    image: legendImage,\n    params: {bbox: [0, 0, 100, 10], dimensions: '200x20'},\n    style: {margin: '4px 0'}\n  });\n\n  legend.add(thumbnail);\n\n  var labelPanel = ui.Panel({\n    widgets: [\n      ui.Label(labels[0], {margin: '0 8px'}),\n      ui.Label(labels[1], {margin: '0 8px', textAlign: 'right', stretch: 'horizontal'})\n    ],\n    layout: ui.Panel.Layout.flow('horizontal')\n  });\n\n  legend.add(labelPanel);\n\n  Map.add(legend);\n}\n\n// 7.2 Add legends to map\n\n// NDVI legend\naddLegend(\n  'NDVI',\n  ['brown','yellow','green'],\n  0, 1,\n  ['Low vegetation', 'High vegetation']\n);\n\n// dNBR legend\naddLegend(\n  'dNBR',\n  ['blue','white','red'],\n  -0.5, 0.5,\n  ['Negative (regrowth)', 'Positive (burned)']\n);"
+  },
+  {
+    "objectID": "projects_en/P08_en.html#the-final-map-for-day-15",
+    "href": "projects_en/P08_en.html#the-final-map-for-day-15",
+    "title": "Burn severity for Delta del Paraná, Argentina",
+    "section": "The final map for Day 15",
+    "text": "The final map for Day 15"
+  },
+  {
+    "objectID": "projects.html",
+    "href": "projects.html",
+    "title": "Portfolio SIG",
+    "section": "",
+    "text": "30 day map challenge\n\nRemote Sensing\n\n\n\nCreated for Day 28 (Black) of the #30daymapchallenge, the relationship between settlement locations and railway tracks.\n\n\n\n28 nov 2025\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n30 day map challenge\n\n\n\nCreated for Day 26 (Transport) of the #30daymapchallenge, bike lane connectivity in Buenos Aires City.\n\n\n\n26 nov 2025\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n30 day map challenge\n\n\n\nCreated for Day 24 (Places and their names) of the #30daymapchallenge, this map shows the street names for Pergamino city in Buenos Aires…\n\n\n\n24 nov 2025\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n30 day map challenge\n\n\n\nCreated for Day 20 (Water) of the #30daymapchallenge, this project shows hidden watercourses in Buenos Aires City.\n\n\n\n20 nov 2025\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n30 day map challenge\n\nRemote Sensing\n\n\n\nCreated for Day 15 (Fire) of the #30daymapchallenge, this project shows the dNBR over the Paraná Delta before and after the 2020 wildfires.\n\n\n\n15 nov 2025\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n30 day map challenge\n\n\n\nCreated for Day 11 (Minimal map) of the #30daymapchallenge, this project shows the minimum elements to describe a city\n\n\n\n11 nov 2025\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n30 day map challenge\n\nRemote Sensing\n\n\n\nCreated for Day 10 (Air) of the #30daymapchallenge, this project shows the CO levels over the Paraná Delta during the 2020 wildfires vs.…\n\n\n\n10 nov 2025\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n30 day map challenge\n\nRemote Sensing\n\n\n\nCreated for Day 8 (Urban) of the #30daymapchallenge, this map shows the drastic change in land use for the wetland area.\n\n\n\n8 nov 2025\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n30 day map challenge\n\n\n\nCreated for Day 4 (My Data) of the #30daymapchallenge, this map shows the route I tracked with my GPS on the Vuelta en Bici\n\n\n\n4 nov 2025\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n30 day map challenge\n\n\n\nCreated for Day 2 (Lines) of the #30daymapchallenge, this project visualizes the relief with all of it’s ups-and-downs in Pampa Linda…\n\n\n\n2 nov 2025\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n30 day map challenge\n\n\n\nCreated for Day 1 (Points) of the #30daymapchallenge, this project visualizes the density of London plane trees in Buenos Aires City —…\n\n\n\n1 nov 2025\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nState of the Map Latam\n\n\n\nApplication of ACUMAR’s Quality of Life Index (ICV/QLI) to the neighbor Reconquista River Basin, based on the region’s strong geographic and socioeconomic similarities to…\n\n\n\n15 nov 2019\n\n\n\n\n\n\nNo hay resultados"
+  },
+  {
+    "objectID": "projects-es.html",
+    "href": "projects-es.html",
+    "title": "Portfolio SIG",
+    "section": "",
+    "text": "Seleccione una categoría del panel a la derecha para filtrar los proyectos.\nEN CONSTRUCCIÓN :)"
+  },
+  {
+    "objectID": "projects-es.html#proyectos-destacados",
+    "href": "projects-es.html#proyectos-destacados",
+    "title": "Portfolio SIG",
+    "section": "",
+    "text": "Seleccione una categoría del panel a la derecha para filtrar los proyectos.\nEN CONSTRUCCIÓN :)"
+  },
+  {
+    "objectID": "projects_en/P12_en.html#project-overview",
+    "href": "projects_en/P12_en.html#project-overview",
+    "title": "Night lights, railways and settlements",
+    "section": "Project Overview",
+    "text": "Project Overview\n\nThis visualization overlays annual VIIRS night light data onto the railway network of Buenos Aires Province.\nThe high contrast of nighttime imagery highlights a distinct spatial correlation: urban settlements align closely with railway corridors, a pattern that persists even along lines that have been abandoned.\nThis relationship underscores the historical influence of rail infrastructure on the region’s urbanization and suggests significant potential for reactivating these corridors to enhance sustainable logistics and regional connectivity.”"
+  },
+  {
+    "objectID": "projects_en/P12_en.html#data-sources-and-tools",
+    "href": "projects_en/P12_en.html#data-sources-and-tools",
+    "title": "Night lights, railways and settlements",
+    "section": "Data Sources and Tools",
+    "text": "Data Sources and Tools\n\nNOAA’s VIIRS Nighttime Day/Night Annual Band Composites V2.2 with Google Earth Engine\nSettlements: Argentine Settlements Database (BAHRA)\nRailroads: OpenStreetMap, using QuickOSM plugin in QGIS\n\n\n\nMade with GIS 3.22.4-Białowieża"
+  },
+  {
+    "objectID": "projects_en/P12_en.html#google-earth-engine-code",
+    "href": "projects_en/P12_en.html#google-earth-engine-code",
+    "title": "Night lights, railways and settlements",
+    "section": "Google Earth Engine code",
+    "text": "Google Earth Engine code\n\n\nClick to view\n\n\n\nGEE Script Day 15-Fire\n\n// 1. Load  ROI to map from assets\nMap.addLayer(roi);\nMap.centerObject(roi);\n\n// 2. Define date range\nvar date = ee.DateRange('2024-01-01', '2025-12-31');\n\n// 3. Import dataset and process\nvar dataset = ee.ImageCollection('NOAA/VIIRS/DNB/ANNUAL_V22')\n                  .filter(ee.Filter.date(date))\n                  .filterBounds(roi);\n                  \nvar nighttime = dataset.select('average_masked');\nvar nighttime_image = nighttime.median().clip(poi);\n\n// 4. Set visualization parameters\nvar nighttimeVis = {min: 0.0, max: 60.0};\nMap.addLayer(nighttime_image, nighttimeVis, 'Nighttime');\n\n// 5. Raster was exported to produce the map\nExport.image.toDrive({\n  image: nighttime_image.select('average_masked'),\n  description: 'Nighttime',\n  folder: 'Nighttime_exports',\n  region: roi.geometry(),\n  scale: 100,\n  maxPixels: 1e13\n});"
+  },
+  {
+    "objectID": "projects_en/P12_en.html#the-final-map-for-day-28",
+    "href": "projects_en/P12_en.html#the-final-map-for-day-28",
+    "title": "Night lights, railways and settlements",
+    "section": "The final map for Day 28",
+    "text": "The final map for Day 28"
   },
   {
     "objectID": "projects_en/P01_en.html#project-overview",
@@ -126,102 +252,60 @@
     "text": "References\n[1] ACUMAR, (2017a). Anexo III: Fichas metodológicas. Índice de Calidad de Vida (ICV). Available at: http://www.acumar.gob.ar/indicadores/indice-calidad-vida-icv/, on 19/08/2019."
   },
   {
-    "objectID": "projects-es.html",
-    "href": "projects-es.html",
-    "title": "Portfolio SIG",
-    "section": "",
-    "text": "Seleccione una categoría del panel a la derecha para filtrar los proyectos.\nEN CONSTRUCCIÓN :)"
-  },
-  {
-    "objectID": "projects-es.html#proyectos-destacados",
-    "href": "projects-es.html#proyectos-destacados",
-    "title": "Portfolio SIG",
-    "section": "",
-    "text": "Seleccione una categoría del panel a la derecha para filtrar los proyectos.\nEN CONSTRUCCIÓN :)"
-  },
-  {
-    "objectID": "projects.html",
-    "href": "projects.html",
-    "title": "Portfolio SIG",
-    "section": "",
-    "text": "30 day map challenge\n\nCartography\n\nQGIS\n\n\n\nCreated for Day 20 (Water) of the #30daymapchallenge, this project shows hidden watercourses in Buenos Aires City.\n\n\n\n20 nov 2025\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n30 day map challenge\n\nRemote Sensing\n\nCartography\n\nQGIS\n\n\n\nCreated for Day 15 (Fire) of the #30daymapchallenge, this project shows the dNBR over the Paraná Delta before and after the 2020 wildfires.\n\n\n\n15 nov 2025\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n30 day map challenge\n\nCartography\n\nQGIS\n\n\n\nCreated for Day 11 (Minimal map) of the #30daymapchallenge, this project shows the minimum elements to describe a city\n\n\n\n11 nov 2025\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n30 day map challenge\n\nRemote Sensing\n\nCartography\n\nQGIS\n\n\n\nCreated for Day 10 (Air) of the #30daymapchallenge, this project shows the CO levels over the Paraná Delta during the 2020 wildfires vs.…\n\n\n\n10 nov 2025\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n30 day map challenge\n\nRemote Sensing\n\nCartography\n\nQGIS\n\n\n\nCreated for Day 8 (Urban) of the #30daymapchallenge, this map shows the drastic change in land use for the wetland area.\n\n\n\n8 nov 2025\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n30 day map challenge\n\nCartography\n\nQGIS\n\n\n\nCreated for Day 4 (My Data) of the #30daymapchallenge, this map shows the route I tracked with my GPS on the Vuelta en Bici\n\n\n\n4 nov 2025\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n30 day map challenge\n\nCartography\n\nQGIS\n\n\n\nCreated for Day 2 (Lines) of the #30daymapchallenge, this project visualizes the relief with all of it’s ups-and-downs in Pampa Linda…\n\n\n\n2 nov 2025\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n30 day map challenge\n\nCartography\n\nQGIS\n\n\n\nCreated for Day 1 (Points) of the #30daymapchallenge, this project visualizes the density of London plane trees in Buenos Aires City —…\n\n\n\n1 nov 2025\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nQGIS\n\nCartography\n\nSOTM Latam\n\n\n\nApplication of ACUMAR’s Quality of Life Index (ICV/QLI) to the neighbor Reconquista River Basin, based on the region’s strong geographic and socioeconomic similarities to…\n\n\n\n15 nov 2019\n\n\n\n\n\n\nNo hay resultados"
-  },
-  {
-    "objectID": "projects_en/P08_en.html#project-overview",
-    "href": "projects_en/P08_en.html#project-overview",
-    "title": "Burn severity for Delta del Paraná, Argentina",
+    "objectID": "projects_en/P02_en.html#project-overview",
+    "href": "projects_en/P02_en.html#project-overview",
+    "title": "London plane trees in Buenos Aires City",
     "section": "Project Overview",
-    "text": "Project Overview\n\nThe wildfires in the Paraná Delta, Argentina - previously studied for Day 10 challenge - were brought up again to analyze from the point of view of its vegetation.\nSentinel-2 imagery was used in Google Earth Engine to calculate NDVI before and after the fire, highlighting the presence and condition of the vegetation immediately prior to and following the events. Using these NDVI values, dNBR was also computed, an index commonly used to estimate burn severity.\nNegative NDVI values were masked and interpreted as water bodies or watercourses."
+    "text": "Project Overview\nLondon plane trees release their seeds in spring. Since they are so abundant in Buenos Aires City, the season is noticeable by almost everyone due to the annoyance of frequent sneezing and seeds getting into one’s eyes.\n\n\n\n\n\n\nPlatanus x hispanica leaves and fruits\n\n\n\n\n\n\n\nFruit and seeds"
   },
   {
-    "objectID": "projects_en/P08_en.html#data-sources-and-tools",
-    "href": "projects_en/P08_en.html#data-sources-and-tools",
-    "title": "Burn severity for Delta del Paraná, Argentina",
+    "objectID": "projects_en/P02_en.html#data-sources-and-tools",
+    "href": "projects_en/P02_en.html#data-sources-and-tools",
+    "title": "London plane trees in Buenos Aires City",
     "section": "Data Sources and Tools",
-    "text": "Data Sources and Tools\n\nESA’s Harmonized Sentinel-2 (MSI) with Google Earth Engine\nProvince boundaries: National Geography Institute of Argentina\nBasemap: Argenmap by National Geography Institute of Argentina\n\n\n\nMade with GIS 3.22.4-Białowieża"
+    "text": "Data Sources and Tools\n\n2017/2018 Urban Tree Census, available on IDECABA\nTrees in streets and parks: IDECABA\nParks and other green spaces: IDECABA\nBasemap: CARTO Voyager\n\n\n\nMade with GIS 3.22.4-Białowieża"
   },
   {
-    "objectID": "projects_en/P08_en.html#google-earth-engine-code",
-    "href": "projects_en/P08_en.html#google-earth-engine-code",
-    "title": "Burn severity for Delta del Paraná, Argentina",
-    "section": "Google Earth Engine code",
-    "text": "Google Earth Engine code\n\n\nClick to view\n\n\n\nGEE Script Day 15-Fire\n\n// 1. Load ROI\nMap.addLayer(roi.style({color: 'purple', fillColor: '00000000', width: 2}), {}, 'ROI');\n\n// 2. Define dates for before and after the fires\nvar date1 = ee.DateRange('2019-12-01', '2019-12-31');\nvar date2 = ee.DateRange('2020-09-01', '2020-09-30');\n\n// 3. Load Sentinel-2 imagery, filter by cloud % and roi bounds\nvar s2_pre = ee.ImageCollection('COPERNICUS/S2_SR_HARMONIZED')\n  .filterDate(date1)\n  .filterBounds(roi)\n  .filterMetadata('CLOUDY_PIXEL_PERCENTAGE', 'less_than', 30) // 30% clouds max\n  .median()\n  .clip(roi);\n\nvar s2_post = ee.ImageCollection('COPERNICUS/S2_SR_HARMONIZED')\n  .filterDate(date2)\n  .filterBounds(roi)\n  .filterMetadata('CLOUDY_PIXEL_PERCENTAGE', 'less_than', 30)\n  .median()\n  .clip(roi);\n\n// 4. Calculate NDVI\nvar ndvi_pre = s2_pre.normalizedDifference(['B8', 'B4']).rename('NDVI_pre');\nvar ndvi_post = s2_post.normalizedDifference(['B8', 'B4']).rename('NDVI_post');\n\n// 5. Calculate NBR and dNBR\nvar nbr_pre = s2_pre.normalizedDifference(['B8', 'B12']).rename('NBR_pre');\nvar nbr_post = s2_post.normalizedDifference(['B8', 'B12']).rename('NBR_post');\nvar dnbr = nbr_pre.subtract(nbr_post).rename('dNBR');\n\n// 6. Establish visualization parameters\nvar ndviParams = {min: 0, max: 1, palette: ['brown','yellow','green']};\nvar dnbrParams = {min: -0.5, max: 0.5, palette: ['blue','white','red']};\n\n// 7. Plot map\nMap.centerObject(roi);\nMap.addLayer(ndvi_pre, ndviParams, 'NDVI pre-incendios');\nMap.addLayer(ndvi_post, ndviParams, 'NDVI post-incendios');\nMap.addLayer(dnbr, dnbrParams, 'dNBR pre-post');\n\n// 7.1 Legend function\nfunction addLegend(title, palette, min, max, labels) {\n  var legend = ui.Panel({\n    style: {\n      position: 'bottom-left',\n      padding: '8px 15px'\n    }\n  });\n\n  var legendTitle = ui.Label({\n    value: title,\n    style: {\n      fontWeight: 'bold',\n      fontSize: '14px',\n      margin: '0 0 4px 0',\n      color: 'black'\n    }\n  });\n\n  legend.add(legendTitle);\n\n  var lon = ee.Image.pixelLonLat().select('longitude');\n  var gradient = lon.multiply((max - min) / 100.0).add(min);\n  var legendImage = gradient.visualize({min: min, max: max, palette: palette});\n\n  var thumbnail = ui.Thumbnail({\n    image: legendImage,\n    params: {bbox: [0, 0, 100, 10], dimensions: '200x20'},\n    style: {margin: '4px 0'}\n  });\n\n  legend.add(thumbnail);\n\n  var labelPanel = ui.Panel({\n    widgets: [\n      ui.Label(labels[0], {margin: '0 8px'}),\n      ui.Label(labels[1], {margin: '0 8px', textAlign: 'right', stretch: 'horizontal'})\n    ],\n    layout: ui.Panel.Layout.flow('horizontal')\n  });\n\n  legend.add(labelPanel);\n\n  Map.add(legend);\n}\n\n// 7.2 Add legends to map\n\n// NDVI legend\naddLegend(\n  'NDVI',\n  ['brown','yellow','green'],\n  0, 1,\n  ['Low vegetation', 'High vegetation']\n);\n\n// dNBR legend\naddLegend(\n  'dNBR',\n  ['blue','white','red'],\n  -0.5, 0.5,\n  ['Negative (regrowth)', 'Positive (burned)']\n);"
+    "objectID": "projects_en/P02_en.html#the-final-map-for-day-1",
+    "href": "projects_en/P02_en.html#the-final-map-for-day-1",
+    "title": "London plane trees in Buenos Aires City",
+    "section": "The final map for Day 1",
+    "text": "The final map for Day 1"
   },
   {
-    "objectID": "projects_en/P08_en.html#the-completed-challenge-for-day-15",
-    "href": "projects_en/P08_en.html#the-completed-challenge-for-day-15",
-    "title": "Burn severity for Delta del Paraná, Argentina",
-    "section": "The completed challenge for Day 15",
-    "text": "The completed challenge for Day 15"
+    "objectID": "projects_en/P02_en.html#results-and-analysis",
+    "href": "projects_en/P02_en.html#results-and-analysis",
+    "title": "London plane trees in Buenos Aires City",
+    "section": "Results and analysis",
+    "text": "Results and analysis\nThe comunas with the most plane trees are:\n\nComuna 15: Agronomía, Paternal, Parque Chas, Chacarita, Villa Crespo, Villa Ortúzar\nComuna 11: Villa del Parque, Villa Devoto, Villa Gral. Mitre, Villa Santa Rita\nComuna 14: Palermo"
   },
   {
-    "objectID": "projects_en/P05_en.html#project-overview",
-    "href": "projects_en/P05_en.html#project-overview",
-    "title": "Spatiotemporal visualization of urban growth in Tigre, Buenos Aires, Argentina",
+    "objectID": "projects_en/P10_en.html#project-overview",
+    "href": "projects_en/P10_en.html#project-overview",
+    "title": "Street names of Pergamino",
     "section": "Project Overview",
-    "text": "Project Overview\n\n\nFor this map I compared the images from 1984 and 2011 from Tigre (Buenos Aires, Argentina), an area that underwent massive urban transformations.\nDuring this period, numerous gated communities were built over former wetlands, altering the natural landscape with artificial lagoons and geometric layouts that sharply contrast with the original vegetation and terrain, which can be seen in the cartography.\n\n\n\n\nCapybaras never left the wetlands even though they changed drastically\n\n\n\n\n\nThe band combination used highlights urban areas in pink and purple tones, vegetation in green, and water bodies in dark blue or black. These compositions help visually identify qualitative patterns and serve as a first step before applying quantitative methods, such as spectral indices."
+    "text": "Project Overview\n\nI chose the city of Pergamino in Buenos Aires, Argentina for this toponym-based challenge because its robust spatial data infrastructure provided access to complete street name data, which I categorized as follows:\n\nCommemorative dates\nMale figures\nFemale figures\nGeographical places\nNature (animals, plants, or bodies of water)\nUnclassified/other: including numbered roads and abstract concepts like “Sovereignty”, and names I couldn’t confidently classify."
   },
   {
-    "objectID": "projects_en/P05_en.html#data-sources-and-tools",
-    "href": "projects_en/P05_en.html#data-sources-and-tools",
-    "title": "Spatiotemporal visualization of urban growth in Tigre, Buenos Aires, Argentina",
+    "objectID": "projects_en/P10_en.html#data-sources-and-tools",
+    "href": "projects_en/P10_en.html#data-sources-and-tools",
+    "title": "Street names of Pergamino",
     "section": "Data Sources and Tools",
-    "text": "Data Sources and Tools\n\nLevel 2 Landsat 5 images from July 1984 and August 2011.\n\nSWIR (~2140 nm), NIR (~830 nm) and Red (~660 nm) bands were shown for RGB respectively.\nThe raster resolution is 30 m.\n\n\n\n\nMade with GIS 3.22.4-Białowieża"
+    "text": "Data Sources and Tools\n\nStreets: IDE Pergamino\nBasemap: Argenmap by National Geography Institute of Argentina\n\n\n\nMade with GIS 3.22.4-Białowieża"
   },
   {
-    "objectID": "projects_en/P05_en.html#the-completed-challenge-for-day-8",
-    "href": "projects_en/P05_en.html#the-completed-challenge-for-day-8",
-    "title": "Spatiotemporal visualization of urban growth in Tigre, Buenos Aires, Argentina",
-    "section": "The completed challenge for Day 8",
-    "text": "The completed challenge for Day 8"
+    "objectID": "projects_en/P10_en.html#interactive-map",
+    "href": "projects_en/P10_en.html#interactive-map",
+    "title": "Street names of Pergamino",
+    "section": "Interactive map",
+    "text": "Interactive map\n\n\nClick to view the code\nlibrary(sf)\nlibrary(leaflet)\n\n# 1. LOAD & CLEAN DATA\nsf_use_s2(FALSE)\nstreets &lt;- st_read(\"../shapefiles/red_vial.geojson\" , quiet = TRUE)\nstreets &lt;- st_zm(streets) \n\n# 2. PREPARE COLORS AND CATEGORIES\nlabels_map &lt;- c(\n  \"Fecha\" = \"Commemorated Dates\",\n  \"L\"     = \"Geographic Places\",\n  \"H\"     = \"Male Names\",\n  \"M\"     = \"Female Names\",\n  \"O\"     = \"Unclassified / Other\",\n  \"N\"     = \"Nature (Plants/Animals)\"\n)\n\nstreets$CATE &lt;- ifelse(streets$CATE %in% names(labels_map), labels_map[streets$CATE], \"Unclassified / Other\")\nstreets$CATE[is.na(streets$CATE)] &lt;- \"Unclassified / Other\"\n\ncate_palette &lt;- c(\n  \"Commemorated Dates\"      = \"#f2eb19\",\n  \"Geographic Places\"       = \"#6e4eed\",\n  \"Male Names\"              = \"#3badde\",\n  \"Female Names\"            = \"#f762e3\",\n  \"Nature (Plants/Animals)\" = \"#4cc630\",\n  \"Unclassified / Other\"    = \"#dc6f35\"\n)\n\nstreets$CATE &lt;- factor(streets$CATE, levels = names(cate_palette))\npal_cate &lt;- colorFactor(palette = cate_palette, domain = streets$CATE)\n\n# 3. RENDER MAP\nleaflet(streets) %&gt;%\n  setView(lng = -60.57, lat = -33.89, zoom = 13) %&gt;%\n  addTiles(\n    urlTemplate = \"https://wms.ign.gob.ar/geoserver/gwc/service/tms/1.0.0/capabaseargenmap@EPSG%3A3857@png/{z}/{x}/{-y}.png\",\n    attribution = \"Argenmap - IGN Argentina\",\n    options = tileOptions(tms = FALSE)\n  ) %&gt;%\n  addPolylines(\n    color = ~pal_cate(CATE),\n    weight = 2,\n    opacity = 0.7,\n    popup = ~paste(\n      \"&lt;b&gt;Street Name:&lt;/b&gt;\", nombre, \"&lt;br&gt;\",\n      \"&lt;b&gt;Category:&lt;/b&gt;\", CATE\n    ),\n    highlightOptions = highlightOptions(\n      weight = 7, color = \"white\", bringToFront = TRUE\n    )\n  ) %&gt;%\n  addLegend(\n    position = \"bottomright\",\n    pal = pal_cate,\n    values = ~CATE,\n    title = \"Legend\"\n  )"
   },
   {
-    "objectID": "projects_en/P06_en.html#project-overview",
-    "href": "projects_en/P06_en.html#project-overview",
-    "title": "Carbon monoxide concentration in Delta del Paraná, Argentina",
-    "section": "Project Overview",
-    "text": "Project Overview\n\n\nSentinel-5P (TROPOMI) dataset was used to visualize carbon monoxide (CO) levels over the Paraná Delta (Argentina) during the 2020 wildfires, compared with 2022 values.\nRemote sensing, in this case, makes it possible to detect fires through atmospheric gases and helps us understand how these events affect not only ecosystems but also nearby cities and communities.\n\n\n\n\nFiremen aiding at the wildfires in 2020.\n\n\n\n\n\nThis work was part of the course “Geostationary Satellites and their Applications to Hydrometeorology”, which I completed at the Gulich Institute (UNC–CONAE) in late 2024."
-  },
-  {
-    "objectID": "projects_en/P06_en.html#data-sources-and-tools",
-    "href": "projects_en/P06_en.html#data-sources-and-tools",
-    "title": "Carbon monoxide concentration in Delta del Paraná, Argentina",
-    "section": "Data Sources and Tools",
-    "text": "Data Sources and Tools\n\nESA’s Sentinel-5P (TROPOMI) with Google Earth Engine\nProvince boundaries: National Geography Institute of Argentina\nBasemap: Argenmap by National Geography Institute of Argentina\n\n\n\nMade with GIS 3.22.4-Białowieża"
-  },
-  {
-    "objectID": "projects_en/P06_en.html#google-earth-engine-code",
-    "href": "projects_en/P06_en.html#google-earth-engine-code",
-    "title": "Carbon monoxide concentration in Delta del Paraná, Argentina",
-    "section": "Google Earth Engine code",
-    "text": "Google Earth Engine code\n\n\nClick to view\n\n\n\nGEE Script Day 10-Air\n\n//1. Add Region of Interest (roi) from assets\nMap.addLayer(roi.style({color: 'purple', fillColor: '00000000', width: 2}), {}, 'ROI');\n\n// 2. Define dates\nvar date1_start = '2020-07-01';\nvar date1_end   = '2020-07-31'; \n\nvar date2_start = '2022-07-01';\nvar date2_end   = '2022-07-31';\n\n// 3. Define palette and create legend\nvar vizParams = {\n  min: 0.0197,\n  max: 0.037,\n  palette: ['#fff7ec', '#fee8c8', '#fdd49e', '#fdbb84', '#fc8d59', '#ef6548', '#d7301f', '#b30000', '#7f0000']\n};\n\n// 4. Load the TROPOMI CO collection and filter\nvar image1 = ee.ImageCollection('COPERNICUS/S5P/OFFL/L3_CO')\n  .select('CO_column_number_density').filterDate(date1_start, date1_end).mean().clip(roi);\nvar image2 = ee.ImageCollection('COPERNICUS/S5P/OFFL/L3_CO')\n  .select('CO_column_number_density').filterDate(date2_start, date2_end).mean().clip(roi);\n\n// 5. Visualization in GEE with legend\n// 5.1. Legend function\nfunction addLegend(title, palette, min, max, labels) {\n  var legend = ui.Panel({\n    style: {\n      position: 'bottom-left',\n      padding: '8px 15px'\n    }\n  });\n  var legendTitle = ui.Label({\n    value: title,\n    style: {\n      fontWeight: 'bold',\n      fontSize: '14px',\n      margin: '0 0 4px 0',\n      color: 'black'\n    }\n  });\n  legend.add(legendTitle);\n  var lon = ee.Image.pixelLonLat().select('longitude');\n  var gradient = lon.multiply((max - min) / 100.0).add(min);\n  var legendImage = gradient.visualize({min: min, max: max, palette: palette});\n  var thumbnail = ui.Thumbnail({\n    image: legendImage,\n    params: {bbox: [0, 0, 100, 10], dimensions: '200x20'},\n    style: {margin: '4px 0'}\n  });\n  legend.add(thumbnail);\n  var labelPanel = ui.Panel({\n    widgets: [\n      ui.Label(labels[0], {margin: '0 8px'}),\n      ui.Label(labels[1], {margin: '0 8px', textAlign: 'right', stretch: 'horizontal'})\n    ],\n    layout: ui.Panel.Layout.flow('horizontal')\n  });\n\n  legend.add(labelPanel);\n  Map.add(legend);\n}\n// 5.2. Final viz\naddLegend('CO (mol/m²)', vizParams.palette, vizParams.min, vizParams.max, [vizParams.min, vizParams.max]);\nMap.centerObject(roi);\nMap.addLayer(image1, vizParams, 'CO Level - 2020');\nMap.addLayer(image2, vizParams, 'CO Level - 2022');"
-  },
-  {
-    "objectID": "projects_en/P06_en.html#the-completed-challenge-for-day-10",
-    "href": "projects_en/P06_en.html#the-completed-challenge-for-day-10",
-    "title": "Carbon monoxide concentration in Delta del Paraná, Argentina",
-    "section": "The completed challenge for Day 10",
-    "text": "The completed challenge for Day 10"
+    "objectID": "projects_en/P10_en.html#the-final-map-for-day-24",
+    "href": "projects_en/P10_en.html#the-final-map-for-day-24",
+    "title": "Street names of Pergamino",
+    "section": "The final map for Day 24",
+    "text": "The final map for Day 24"
   },
   {
     "objectID": "projects_en/P04_en.html#project-overview",
@@ -238,11 +322,11 @@
     "text": "Data Sources and Tools\n\nMy GPS Data retrieved with Google Maps and recovered using Timeline Viewer Map\nBasemap: Argenmap by National Geography Institute of Argentina\n\n\n\nMade with GIS 3.22.4-Białowieża"
   },
   {
-    "objectID": "projects_en/P04_en.html#the-completed-challenge-for-day-4",
-    "href": "projects_en/P04_en.html#the-completed-challenge-for-day-4",
+    "objectID": "projects_en/P04_en.html#the-final-map-for-day-4",
+    "href": "projects_en/P04_en.html#the-final-map-for-day-4",
     "title": "My tour around Buenos Aires City",
-    "section": "The completed challenge for Day 4",
-    "text": "The completed challenge for Day 4"
+    "section": "The final map for Day 4",
+    "text": "The final map for Day 4"
   },
   {
     "objectID": "projects_en/P07_en.html#project-overview",
@@ -259,10 +343,10 @@
     "text": "Data Sources and Tools\n\nProvince and department boundaries, settlements, water bodies, railways and rail stations, roads: National Geography Institute of Argentina\n\n\n\nMade with GIS 3.22.4-Białowieża"
   },
   {
-    "objectID": "projects_en/P07_en.html#the-completed-challenge-for-day-11",
-    "href": "projects_en/P07_en.html#the-completed-challenge-for-day-11",
+    "objectID": "projects_en/P07_en.html#the-final-map-for-day-11",
+    "href": "projects_en/P07_en.html#the-final-map-for-day-11",
     "title": "Minimalist map of an Argentinian town",
-    "section": "The completed challenge for Day 11",
-    "text": "The completed challenge for Day 11\n\n\n\n\n\nFirst hint\n\nIt’s in Argentina\n\n\n\nSecond hint\n\nIt’s in Buenos Aires Province (not the Capital city)\n\n\n\nAnswer!\n\nIt’s Chascomús"
+    "section": "The final map for Day 11",
+    "text": "The final map for Day 11\n\n\n\n\n\nFirst hint\n\nIt’s in Argentina\n\n\n\nSecond hint\n\nIt’s in Buenos Aires Province (not the Capital city)\n\n\n\nAnswer!\n\nIt’s Chascomús"
   }
 ]

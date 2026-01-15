@@ -1,0 +1,47 @@
+---
+title: "Bike lanes in Buenos Aires City"
+description: "Created for Day 26 (Transport) of the [#30daymapchallenge](https://30daymapchallenge.com/), bike lane connectivity in Buenos Aires City."
+date: "2025-11-26"
+lang: en
+categories: [30 day map challenge]
+image: ../images/P11_cover.png
+format:
+  html:
+    code-fold: true 
+---
+****
+## Project Overview
+
+:::{.text-justify}
+lorem ipsum
+:::
+
+## Data Sources and Tools
+
+* Bike lanes and EcoBici stations: [IDECABA](https://idecaba.buenosaires.gob.ar/)
+* Basemap: [Argenmap by National Geography Institute of Argentina](https://www.ign.gob.ar/AreaServicios/Argenmap/Introduccion)
+
+****
+* Made with ![](../images/QGIS.png){width=1em style="vertical-align: middle;"}[GIS](https://qgis.org/project/overview/) 3.22.4-Białowieża
+
+## Interactive map
+```{r}
+#| echo: true
+#| code-summary: "Click to view the code"
+#| warning: false
+#| message: false
+
+library(sf)
+library(leaflet)
+
+# lorem ipsum
+```
+
+## The final map for Day 26
+
+::: {.text-center}
+![](../images/P11_map1.png){width=100% class="lightbox"}
+
+![](../images/P11_map2.png){width=100% class="lightbox"}
+:::
+

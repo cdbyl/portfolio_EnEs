@@ -3,7 +3,7 @@ title: "My tour around Buenos Aires City"
 description: "Created for Day 4 (My Data) of the [#30daymapchallenge](https://30daymapchallenge.com/), this map shows the route I tracked with my GPS on the *Vuelta en Bici*"
 date: "2025-11-04"
 lang: en
-categories: [30 day map challenge, Cartography, QGIS]
+categories: [30 day map challenge]
 image: ../images/P04_cover.png
 format:
   html:
@@ -33,7 +33,7 @@ I used public transport to get to the starting point and to return, and I wanted
 ****
 * Made with ![](../images/QGIS.png){width=1em style="vertical-align: middle;"}[GIS](https://qgis.org/project/overview/) 3.22.4-Białowieża
 
-## The completed challenge for Day 4
+## The final map for Day 4
 
 ::: {.text-center}
 
